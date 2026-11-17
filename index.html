@@ -24,7 +24,7 @@
 </nav><main id="content"></main></div>
 </div>
 <script>
-const API_URL="COLE_A_URL_DA_FUNCTION_AQUI";
+const API_URL=https://bnbrhxacblwzasejxvvn.supabase.co/functions/v1/painel-api;
 let token=sessionStorage.getItem("lp_token")||"", page="inicio", cache={};
 async function api(action,data={}){const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({action,...data})});const j=await r.json();if(!r.ok)throw Error(j.error||"Falha na operação");return j}
 async function login(){const pin=document.querySelector("#pin").value;const m=document.querySelector("#loginMsg");if(!/^\d{6}$/.test(pin)){m.textContent="Digite os seis números.";return}try{const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"login",pin})});const j=await r.json();if(!r.ok)throw Error(j.error||"PIN inválido");token=j.token;sessionStorage.setItem("lp_token",token);document.querySelector("#login").classList.add("hidden");document.querySelector("#app").classList.remove("hidden");render()}catch(e){m.textContent=e.message}}
