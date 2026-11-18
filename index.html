@@ -20,7 +20,7 @@
 <script>
 const API_URL="https://bnbrhxacblwzasejxvvn.supabase.co/functions/v1/painel-api";
 let page="inicio", cache={};
-async function api(action,data={}){const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action,...data})});const j=await r.json();if(!r.ok)throw Error(j.error||"Falha na operação");return j}
+async function api(action,data={}){const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action,data})})});const j=await r.json();if(!r.ok)throw Error(j.error||"Falha na operação");return j}
 document.querySelector("#nav").addEventListener("click",e=>{const b=e.target.closest("button[data-page]");if(!b)return;page=b.dataset.page;document.querySelectorAll("#nav button").forEach(x=>x.classList.toggle("active",x===b));render()});
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const money=n=>(Number(n)||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
